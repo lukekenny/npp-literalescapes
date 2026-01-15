@@ -32,6 +32,7 @@ const TCHAR NPP_PLUGIN_NAME[] = TEXT("LiteralEscapes");
 void setInfo(NppData notepadPlusData)
 {
 	nppData = notepadPlusData;
+	commandMenuInit();
 }
 
 const TCHAR* getName()
@@ -70,6 +71,11 @@ void pluginInit(HANDLE /*hModule*/)
 void pluginCleanUp()
 {
 	// no-op
+}
+
+void commandMenuInit()
+{
+	setCommand(0, TEXT("Decode Literal Escapes"), decodeEscapesCommand, nullptr, false);
 }
 
 void setCommand(int index, const TCHAR* cmdName, PFUNCPLUGINCMD pFunc, ShortcutKey* sk, bool check0nInit)
