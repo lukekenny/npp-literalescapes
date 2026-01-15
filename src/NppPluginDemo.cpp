@@ -78,10 +78,15 @@ namespace
 		Sci_TextRangeFull tr{};
 		tr.chrg.cpMin = start;
 		tr.chrg.cpMax = end;
+
+		const auto len = static_cast<size_t>(end - start);
 		std::string buf;
-		buf.resize(static_cast<size_t>(end - start) + 1); // +1 for NUL
-		tr.lpstrText = buf.data();
+		buf.resize(len + 1); // +1 for NUL
+
+		tr.lpstrText = buf.empty() ? nullptr : &buf[0]; // writable char*
 		::SendMessage(hSci, SCI_GETTEXTRANGEFULL, 0, reinterpret_cast<LPARAM>(&tr));
+
+		// SCI_GETTEXTRANGEFULL guarantees NUL-termination; shrink to actual C-string length
 		buf.resize(std::strlen(buf.c_str()));
 		return buf;
 	}

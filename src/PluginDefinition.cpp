@@ -72,9 +72,12 @@ void pluginCleanUp()
 	// no-op
 }
 
-void commandMenuInit()
+void setCommand(int index, const TCHAR* cmdName, PFUNCPLUGINCMD pFunc, ShortcutKey* sk, bool check0nInit)
 {
-	setCommand(0, TEXT("Decode literal escapes (\\n or \\\\n -> LF)"), decodeEscapesCommand, nullptr, false);
+	funcItem[index]._pFunc = pFunc;
+	lstrcpy(funcItem[index]._itemName, cmdName);
+	funcItem[index]._pShKey = sk;
+	funcItem[index]._init2Check = check0nInit;
 }
 
 void commandMenuCleanUp()

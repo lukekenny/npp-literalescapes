@@ -33,7 +33,7 @@ void commandMenuInit();
 void commandMenuCleanUp();
 
 // Helper to register commands
-void setCommand(int index, TCHAR* cmdName, PFUNCPLUGINCMD pFunc, ShortcutKey* sk = NULL, bool check0nInit = false);
+void setCommand(int index, const TCHAR* cmdName, PFUNCPLUGINCMD pFunc, ShortcutKey* sk = NULL, bool check0nInit = false);
 
 // Plugin command
 void decodeEscapesCommand();
